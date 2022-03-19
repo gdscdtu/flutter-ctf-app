@@ -6,7 +6,7 @@ class Level1Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text("Level1"),
+      child: Text("Level 1"),
     );
   }
 }

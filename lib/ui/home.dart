@@ -16,7 +16,6 @@ class HomeScreen extends StatelessWidget {
         Provider.of<FirestoreDatabase>(context, listen: false);
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
       body: StreamBuilder(
         stream: fireStoreDatabase.userInformStream(),
         builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
@@ -38,7 +37,7 @@ class HomeScreen extends StatelessWidget {
   Widget _renderLevelScreen({int? level}) {
     switch (level) {
       case 1:
-        return const Level1Screen();
+        return Level1Screen();
       case 2:
         return const Level2Screen();
       case 3:

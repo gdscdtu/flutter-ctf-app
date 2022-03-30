@@ -1,11 +1,33 @@
+import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_ctf_app/consts/my_icons.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'dart:math';
 
 import '../../consts/my_colors.dart';
+import '../../services/firestore_database.dart';
 
-class Level1Screen extends StatelessWidget {
+class Level1Screen extends StatefulWidget {
   const Level1Screen({Key? key}) : super(key: key);
+
+  @override
+  State<Level1Screen> createState() => _Level1ScreenState();
+}
+
+class _Level1ScreenState extends State<Level1Screen> {
+  final TextEditingController _passwordController =
+      TextEditingController(text: '');
+
+  late ConfettiController _controllerBottomCenter;
+
+  @override
+  void initState() {
+    super.initState();
+    _controllerBottomCenter =
+        ConfettiController(duration: const Duration(seconds: 10));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +72,7 @@ class Level1Screen extends StatelessWidget {
                   child: SizedBox(
                     height: 50,
                     child: TextFormField(
+                      controller: _passwordController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
@@ -77,7 +100,9 @@ class Level1Screen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _onSubmit(context);
+                      },
                       child: const Text(
                         'Kiểm tra',
                         style: TextStyle(
@@ -123,15 +148,59 @@ class Level1Screen extends StatelessWidget {
                   ),
                 )
               ],
-            )
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ConfettiWidget(
+                confettiController: _controllerBottomCenter,
+                blastDirection: -pi / 2,
+                emissionFrequency: 0.01,
+                numberOfParticles: 20,
+                maxBlastForce: 100,
+                minBlastForce: 80,
+                gravity: 0.3,
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
+  void _onSubmit(BuildContext context) async {
+    if (_passwordController.text.toString() == "xTbdasdbibwdiabs") {
+      final firestoreDatabase =
+          Provider.of<FirestoreDatabase>(context, listen: false);
+
+      Fluttertoast.showToast(
+        msg: "Correct password! Congratulations!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.TOP,
+        timeInSecForIosWeb: 1,
+        backgroundColor: MyColors.jungleGreen,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+      _controllerBottomCenter.play();
+
+      await Future.delayed(const Duration(seconds: 4),
+          () async => firestoreDatabase.updateLevel(level: 2));
+      return;
+    }
+
+    Fluttertoast.showToast(
+      msg: "Inncorect password! Try again :D",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 1,
+      backgroundColor: MyColors.cinnabar,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
+
   void _copyToClipboard(BuildContext context) {
-    Clipboard.setData(const ClipboardData(text: "123456789")).then((_) {
+    Clipboard.setData(const ClipboardData(text: "xTbdasdbibwdiabs")).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Password copied to clipboard")));
     });

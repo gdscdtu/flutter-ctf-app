@@ -26,6 +26,11 @@ class FirestoreDatabase {
 
   final _fireStoreService = FirestoreService.instance;
 
+  // Method to update user's level
+  Future<void> updateLevel({required int level}) async =>
+      await _fireStoreService
+          .update(path: FirestorePath.user(uid), data: {"level": level});
+
   //Method to retrieve userModel object based on the given uid
   Stream<UserModel> userInformStream() => _fireStoreService.documentStream(
         path: FirestorePath.user(uid),

@@ -16,16 +16,14 @@ class HomeScreen extends StatelessWidget {
         Provider.of<FirestoreDatabase>(context, listen: false);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Flutter CTF"),
-        centerTitle: true,
-      ),
       body: StreamBuilder(
         stream: fireStoreDatabase.userInformStream(),
         builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
           if (snapshot.hasData) {
             UserModel? user = snapshot.data;
-            return _renderLevelScreen(level: user?.level);
+            return SafeArea(
+              child: _renderLevelScreen(level: user?.level),
+            );
           }
 
           return const Center(
@@ -39,7 +37,7 @@ class HomeScreen extends StatelessWidget {
   Widget _renderLevelScreen({int? level}) {
     switch (level) {
       case 1:
-        return const Level1Screen();
+        return Level1Screen();
       case 2:
         return const Level2Screen();
       case 3:

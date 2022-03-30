@@ -16,8 +16,15 @@ class FirestoreService {
     bool merge = false,
   }) async {
     final reference = FirebaseFirestore.instance.doc(path);
-    print('$path: $data');
     await reference.set(data);
+  }
+
+  Future<void> update({
+    required String path,
+    required Map<String, dynamic> data,
+  }) async {
+    final reference = FirebaseFirestore.instance.doc(path);
+    await reference.update(data);
   }
 
   Future<void> bulkSet({

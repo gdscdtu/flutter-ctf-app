@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_ctf_app/consts/my_icons.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/ui/background.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
@@ -168,7 +169,9 @@ class _Level1ScreenState extends State<Level1Screen> {
       final firestoreDatabase =
           Provider.of<FirestoreDatabase>(context, listen: false);
 
-      successNotification(message: "Correct password! Congratulations!");
+      successNotification(
+          message: "Correct password! Congratulations!",
+          toastGravity: ToastGravity.BOTTOM);
 
       _controllerBottomCenter.play();
 
@@ -188,7 +191,9 @@ class _Level1ScreenState extends State<Level1Screen> {
       return;
     }
 
-    failureNotification(message: "Inncorect password! Try again :D");
+    failureNotification(
+        message: "Inncorect password! Try again :D",
+        toastGravity: ToastGravity.BOTTOM);
   }
 
   void _copyToClipboard(BuildContext context) {

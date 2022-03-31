@@ -12,7 +12,11 @@ import '../../services/firestore_database.dart';
 import '../unlocked_level_screen.dart';
 
 class Level1Screen extends StatefulWidget {
-  const Level1Screen({Key? key}) : super(key: key);
+  const Level1Screen({Key? key, required this.level})
+      : assert(level == 1),
+        super(key: key);
+
+  final int level;
 
   @override
   State<Level1Screen> createState() => _Level1ScreenState();
@@ -50,9 +54,9 @@ class _Level1ScreenState extends State<Level1Screen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Image.asset(MyIcons.keys),
-                    const Text(
-                      "Level 1",
-                      style: TextStyle(
+                    Text(
+                      "Level ${widget.level}",
+                      style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                         fontSize: 24,
@@ -171,11 +175,12 @@ class _Level1ScreenState extends State<Level1Screen> {
       await Future.delayed(
         const Duration(seconds: 4),
         () async {
-          firestoreDatabase.updateLevel(level: 2);
+          firestoreDatabase.updateLevel(level: widget.level + 1);
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const UnlockedLevelScreen(level: 2),
+              builder: (context) =>
+                  UnlockedLevelScreen(level: widget.level + 1),
             ),
           );
         },

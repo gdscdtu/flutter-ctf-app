@@ -2,11 +2,11 @@ import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_ctf_app/consts/my_icons.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
 import '../../consts/my_colors.dart';
+import '../../helper/notifications.dart';
 import '../../services/firestore_database.dart';
 
 class Level1Screen extends StatefulWidget {
@@ -172,15 +172,8 @@ class _Level1ScreenState extends State<Level1Screen> {
       final firestoreDatabase =
           Provider.of<FirestoreDatabase>(context, listen: false);
 
-      Fluttertoast.showToast(
-        msg: "Correct password! Congratulations!",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.TOP,
-        timeInSecForIosWeb: 1,
-        backgroundColor: MyColors.jungleGreen,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      successNotification(message: "Correct password! Congratulations!");
+
       _controllerBottomCenter.play();
 
       await Future.delayed(const Duration(seconds: 4),
@@ -188,15 +181,7 @@ class _Level1ScreenState extends State<Level1Screen> {
       return;
     }
 
-    Fluttertoast.showToast(
-      msg: "Inncorect password! Try again :D",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.TOP,
-      timeInSecForIosWeb: 1,
-      backgroundColor: MyColors.cinnabar,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
+    failureNotification(message: "Inncorect password! Try again :D");
   }
 
   void _copyToClipboard(BuildContext context) {

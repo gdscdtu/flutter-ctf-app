@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_ctf_app/models/user_model.dart';
 import 'package:flutter_ctf_app/services/firestore_database.dart';
 import 'package:flutter_ctf_app/ui/level1/level1.dart';
+import 'package:flutter_ctf_app/ui/unlocked_level_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'level2/level2.dart';
@@ -37,9 +38,9 @@ class HomeScreen extends StatelessWidget {
   Widget _renderLevelScreen({int? level}) {
     switch (level) {
       case 1:
-        return Level1Screen();
+        return const Level1Screen();
       case 2:
-        return const Level2Screen();
+        return const UnlockedLevelScreen();
       case 3:
         return const Level3Screen();
       default:

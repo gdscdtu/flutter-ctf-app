@@ -38,11 +38,17 @@ class HomeScreen extends StatelessWidget {
   Widget _renderLevelScreen({int? level}) {
     switch (level) {
       case 1:
-        return const Level1Screen();
+        return Level1Screen(
+          level: 1,
+        );
       case 2:
-        return const Level2Screen();
+        return Level2Screen(
+          level: 2,
+        );
       case 3:
-        return const Level3Screen();
+        return Level3Screen(
+          level: 3,
+        );
       default:
         return const Center(
           child: Text("Home Screen"),

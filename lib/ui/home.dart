@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'level2/level2.dart';
 import 'level3/level3.dart';
+import 'level4/level4.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -38,16 +39,20 @@ class HomeScreen extends StatelessWidget {
   Widget _renderLevelScreen({int? level}) {
     switch (level) {
       case 1:
-        return Level1Screen(
+        return const Level1Screen(
           level: 1,
         );
       case 2:
-        return Level2Screen(
+        return const Level2Screen(
           level: 2,
         );
       case 3:
-        return Level3Screen(
+        return const Level3Screen(
           level: 3,
+        );
+      case 4:
+        return const Level4Screen(
+          level: 4,
         );
       default:
         return const Center(

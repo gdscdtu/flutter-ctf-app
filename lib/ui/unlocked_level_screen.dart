@@ -1,11 +1,14 @@
 import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_ctf_app/ui/home.dart';
 import 'dart:math';
 
 import '../../consts/my_colors.dart';
 
 class UnlockedLevelScreen extends StatefulWidget {
-  const UnlockedLevelScreen({Key? key}) : super(key: key);
+  const UnlockedLevelScreen({Key? key, required this.level}) : super(key: key);
+
+  final int level;
 
   @override
   State<UnlockedLevelScreen> createState() => _UnlockedLevelScreenState();
@@ -17,6 +20,16 @@ class _UnlockedLevelScreenState extends State<UnlockedLevelScreen> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(
+      const Duration(seconds: 3),
+      () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        ),
+      ),
+    );
+
     _controllerCenter =
         ConfettiController(duration: const Duration(seconds: 10));
     _controllerCenter.play();
@@ -86,9 +99,9 @@ class _UnlockedLevelScreenState extends State<UnlockedLevelScreen> {
                           ),
                         ),
                         onPressed: () {},
-                        child: const Text(
-                          'Level 2',
-                          style: TextStyle(
+                        child: Text(
+                          'Level ${widget.level}',
+                          style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 20,

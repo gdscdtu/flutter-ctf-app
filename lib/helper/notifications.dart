@@ -3,11 +3,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../consts/my_colors.dart';
 
-void successNotification({required String message}) {
+void successNotification(
+    {required String message, ToastGravity? toastGravity}) {
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.TOP,
+    gravity: toastGravity ?? ToastGravity.TOP,
     timeInSecForIosWeb: 1,
     backgroundColor: MyColors.jungleGreen,
     textColor: Colors.white,
@@ -15,11 +16,12 @@ void successNotification({required String message}) {
   );
 }
 
-void failureNotification({required String message}) {
+void failureNotification(
+    {required String message, ToastGravity? toastGravity}) {
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.TOP,
+    gravity: toastGravity ?? ToastGravity.TOP,
     timeInSecForIosWeb: 1,
     backgroundColor: MyColors.cinnabar,
     textColor: Colors.white,

@@ -2,12 +2,14 @@ import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_ctf_app/consts/my_icons.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_ctf_app/ui/background.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
 import '../../consts/my_colors.dart';
 import '../../helper/notifications.dart';
 import '../../services/firestore_database.dart';
+import '../unlocked_level_screen.dart';
 
 class Level1Screen extends StatefulWidget {
   const Level1Screen({Key? key}) : super(key: key);
@@ -31,16 +33,7 @@ class _Level1ScreenState extends State<Level1Screen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      constraints: const BoxConstraints.expand(),
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/ctf_background.png"),
-          fit: BoxFit.cover,
-        ),
-      ),
+    return Background(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
@@ -81,7 +74,6 @@ class _Level1ScreenState extends State<Level1Screen> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         // enabled: false,
-                        hintText: 'Vừng ơi mở ra',
                       ),
                     ),
                   ),
@@ -176,8 +168,18 @@ class _Level1ScreenState extends State<Level1Screen> {
 
       _controllerBottomCenter.play();
 
-      await Future.delayed(const Duration(seconds: 4),
-          () async => firestoreDatabase.updateLevel(level: 2));
+      await Future.delayed(
+        const Duration(seconds: 4),
+        () async {
+          firestoreDatabase.updateLevel(level: 2);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const UnlockedLevelScreen(level: 2),
+            ),
+          );
+        },
+      );
       return;
     }
 

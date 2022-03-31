@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
       case 1:
         return const Level1Screen();
       case 2:
-        return const UnlockedLevelScreen();
+        return const Level2Screen();
       case 3:
         return const Level3Screen();
       default:

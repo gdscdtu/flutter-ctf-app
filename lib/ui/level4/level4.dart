@@ -12,17 +12,17 @@ import '../../helper/notifications.dart';
 import '../../services/firestore_database.dart';
 import '../unlocked_level_screen.dart';
 
-class Level3Screen extends StatefulWidget {
-  const Level3Screen({Key? key, required this.level})
-      : assert(level == 3),
+class Level4Screen extends StatefulWidget {
+  const Level4Screen({Key? key, required this.level})
+      : assert(level == 4),
         super(key: key);
 
   final int level;
   @override
-  State<Level3Screen> createState() => _Level3ScreenState();
+  State<Level4Screen> createState() => _Level4ScreenState();
 }
 
-class _Level3ScreenState extends State<Level3Screen> {
+class _Level4ScreenState extends State<Level4Screen> {
   final TextEditingController _passwordController =
       TextEditingController(text: '');
 
@@ -64,26 +64,24 @@ class _Level3ScreenState extends State<Level3Screen> {
                     ),
                   ],
                 ),
-                Visibility(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: SizedBox(
-                      height: 50,
-                      child: TextFormField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          // enabled: false,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: SizedBox(
+                    height: 50,
+                    child: TextFormField(
+                      enabled: false,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(30),
                         ),
+                        // enabled: false,
                       ),
                     ),
                   ),
-                  visible: false,
                 ),
                 Padding(
                   padding:
@@ -129,7 +127,7 @@ class _Level3ScreenState extends State<Level3Screen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "0DbvvZueyNalWjFdFM29",
+                        "GDSC-DTU-2022",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
@@ -167,7 +165,7 @@ class _Level3ScreenState extends State<Level3Screen> {
   }
 
   void _onSubmit(BuildContext context) async {
-    if (_passwordController.text.toString() == "0DbvvZueyNalWjFdFM29") {
+    if (_passwordController.text.toString() == "GDSC-DTU-2022") {
       final firestoreDatabase =
           Provider.of<FirestoreDatabase>(context, listen: false);
 
@@ -201,8 +199,7 @@ class _Level3ScreenState extends State<Level3Screen> {
   }
 
   void _copyToClipboard(BuildContext context) {
-    Clipboard.setData(const ClipboardData(text: "0DbvvZueyNalWjFdFM29"))
-        .then((_) {
+    Clipboard.setData(const ClipboardData(text: "GDSC-DTU-2022")).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Password copied to clipboard")));
     });

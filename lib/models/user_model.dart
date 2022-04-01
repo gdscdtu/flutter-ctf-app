@@ -6,15 +6,17 @@ class UserModel {
   String? photoUrl;
   int? level;
 
-  UserModel(
-      {required this.uid,
-      this.email,
-      this.displayName,
-      this.phoneNumber,
-      this.photoUrl,
-      this.level});
+  UserModel({
+    required this.uid,
+    this.email,
+    this.displayName,
+    this.phoneNumber = "",
+    this.photoUrl,
+    this.level = 1,
+  });
 
-  factory UserModel.fromJson(Map<String, dynamic> data, String documentId) {
+  factory UserModel.fromJson(Map<String, dynamic> data) {
+    String uid = data['uid'];
     String email = data['email'];
     String displayName = data['displayName'];
     String phoneNumber = data['phoneNumber'];
@@ -22,12 +24,13 @@ class UserModel {
     int level = data['level'];
 
     return UserModel(
-        uid: documentId,
-        email: email,
-        displayName: displayName,
-        phoneNumber: phoneNumber,
-        photoUrl: photoUrl,
-        level: level);
+      uid: uid,
+      email: email,
+      displayName: displayName,
+      phoneNumber: phoneNumber,
+      photoUrl: photoUrl,
+      level: level,
+    );
   }
 
   Map<String, dynamic> toJson() {

@@ -39,6 +39,7 @@ dependencies:
   cloud_firestore:
   flutter_platform_widgets:
   firebase_core: ^1.13.1
+  google_sign_in: ^5.0.4
 
   # For Svg
   flutter_svg: ^1.0.3

@@ -5,6 +5,7 @@ import 'package:flutter_ctf_app/ui/level1/level1.dart';
 import 'package:flutter_ctf_app/ui/unlocked_level_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'auth/login_screen.dart';
 import 'level2/level2.dart';
 import 'level3/level3.dart';
 import 'level4/level4.dart';
@@ -18,21 +19,23 @@ class HomeScreen extends StatelessWidget {
     final fireStoreDatabase =
         Provider.of<FirestoreDatabase>(context, listen: false);
 
-    return Scaffold(
-      body: StreamBuilder(
-        stream: fireStoreDatabase.userInformStream(),
-        builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
-          if (snapshot.hasData) {
-            UserModel? user = snapshot.data;
-            return SafeArea(
-              child: _renderLevelScreen(level: user?.level),
-            );
-          }
+    return SafeArea(
+      child: Scaffold(
+        body: StreamBuilder(
+          stream: fireStoreDatabase.userInformStream(),
+          builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
+            if (snapshot.hasData) {
+              UserModel? user = snapshot.data;
+              return SafeArea(
+                child: _renderLevelScreen(level: user?.level),
+              );
+            }
 
-          return const Center(
-            child: Text("Home Screen"),
-          );
-        },
+            return const Material(
+              child: Center(child: CircularProgressIndicator()),
+            );
+          },
+        ),
       ),
     );
   }
@@ -56,7 +59,7 @@ class HomeScreen extends StatelessWidget {
           level: 4,
         );
       case 5:
-        return Level5Screen(
+        return const Level5Screen(
           level: 5,
         );
       default:

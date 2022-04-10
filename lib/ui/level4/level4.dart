@@ -1,16 +1,12 @@
+import 'dart:math';
+
 import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
-import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/ui/background.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
-import 'dart:math';
 
 import '../../consts/my_colors.dart';
 import '../../consts/my_icons.dart';
-import '../../helper/notifications.dart';
-import '../../services/firestore_database.dart';
-import '../unlocked_level_screen.dart';
+import '../../helper/on_submit.dart';
 
 class Level4Screen extends StatefulWidget {
   const Level4Screen({Key? key, required this.level})
@@ -98,7 +94,12 @@ class _Level4ScreenState extends State<Level4Screen> {
                         ),
                       ),
                       onPressed: () {
-                        _onSubmit(context);
+                        onSubmit(
+                          context: context,
+                          confettiController: _controllerBottomCenter,
+                          level: widget.level,
+                          code: _passwordController.text.toString(),
+                        );
                       },
                       child: const Text(
                         'Kiểm tra',
@@ -137,9 +138,7 @@ class _Level4ScreenState extends State<Level4Screen> {
                       IconButton(
                         icon: const Icon(Icons.copy),
                         color: MyColors.silver,
-                        onPressed: () {
-                          _copyToClipboard(context);
-                        },
+                        onPressed: () {},
                       ),
                     ],
                   ),
@@ -162,46 +161,5 @@ class _Level4ScreenState extends State<Level4Screen> {
         ),
       ),
     );
-  }
-
-  void _onSubmit(BuildContext context) async {
-    if (_passwordController.text.toString() == "GDSC-DTU-2022") {
-      final firestoreDatabase =
-          Provider.of<FirestoreDatabase>(context, listen: false);
-
-      successNotification(
-        message: "Correct password! Congratulations!",
-        toastGravity: ToastGravity.BOTTOM,
-      );
-
-      _controllerBottomCenter.play();
-
-      await Future.delayed(
-        const Duration(seconds: 4),
-        () async {
-          firestoreDatabase.updateLevel(level: widget.level + 1);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  UnlockedLevelScreen(level: widget.level + 1),
-            ),
-          );
-        },
-      );
-      return;
-    }
-
-    failureNotification(
-      message: "Inncorect password! Try again :D",
-      toastGravity: ToastGravity.BOTTOM,
-    );
-  }
-
-  void _copyToClipboard(BuildContext context) {
-    Clipboard.setData(const ClipboardData(text: "GDSC-DTU-2022")).then((_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Password copied to clipboard")));
-    });
   }
 }

@@ -1,16 +1,13 @@
+import 'dart:math';
+
 import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
-import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/ui/background.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
-import 'dart:math';
 
 import '../../consts/my_colors.dart';
 import '../../consts/my_icons.dart';
-import '../../helper/notifications.dart';
-import '../../services/firestore_database.dart';
-import '../unlocked_level_screen.dart';
+import '../../helper/copy_to_clipboard.dart';
+import '../../helper/on_submit.dart';
 
 class Level3Screen extends StatefulWidget {
   const Level3Screen({Key? key, required this.level})
@@ -100,7 +97,12 @@ class _Level3ScreenState extends State<Level3Screen> {
                         ),
                       ),
                       onPressed: () {
-                        _onSubmit(context);
+                        onSubmit(
+                          context: context,
+                          confettiController: _controllerBottomCenter,
+                          level: widget.level,
+                          code: _passwordController.text.toString(),
+                        );
                       },
                       child: const Text(
                         'Kiểm tra',
@@ -129,7 +131,7 @@ class _Level3ScreenState extends State<Level3Screen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "0DbvvZueyNalWjFdFM29",
+                        "DTU-DSC-2022",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
@@ -140,7 +142,7 @@ class _Level3ScreenState extends State<Level3Screen> {
                         icon: const Icon(Icons.copy),
                         color: MyColors.silver,
                         onPressed: () {
-                          _copyToClipboard(context);
+                          copyToClipboard(context, "Hello");
                         },
                       ),
                     ],
@@ -164,47 +166,5 @@ class _Level3ScreenState extends State<Level3Screen> {
         ),
       ),
     );
-  }
-
-  void _onSubmit(BuildContext context) async {
-    if (_passwordController.text.toString() == "0DbvvZueyNalWjFdFM29") {
-      final firestoreDatabase =
-          Provider.of<FirestoreDatabase>(context, listen: false);
-
-      successNotification(
-        message: "Correct password! Congratulations!",
-        toastGravity: ToastGravity.BOTTOM,
-      );
-
-      _controllerBottomCenter.play();
-
-      await Future.delayed(
-        const Duration(seconds: 4),
-        () async {
-          firestoreDatabase.updateLevel(level: widget.level + 1);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  UnlockedLevelScreen(level: widget.level + 1),
-            ),
-          );
-        },
-      );
-      return;
-    }
-
-    failureNotification(
-      message: "Inncorect password! Try again :D",
-      toastGravity: ToastGravity.BOTTOM,
-    );
-  }
-
-  void _copyToClipboard(BuildContext context) {
-    Clipboard.setData(const ClipboardData(text: "0DbvvZueyNalWjFdFM29"))
-        .then((_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Password copied to clipboard")));
-    });
   }
 }

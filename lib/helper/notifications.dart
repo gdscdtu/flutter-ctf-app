@@ -4,7 +4,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../consts/my_colors.dart';
 
 void successNotification(
-    {required String message, ToastGravity? toastGravity}) {
+    {required BuildContext context,
+    required String message,
+    ToastGravity? toastGravity}) {
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_SHORT,
@@ -17,7 +19,9 @@ void successNotification(
 }
 
 void failureNotification(
-    {required String message, ToastGravity? toastGravity}) {
+    {required BuildContext context,
+    required String message,
+    ToastGravity? toastGravity}) {
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_SHORT,

@@ -7,13 +7,14 @@ import 'package:flutter_ctf_app/ui/background.dart';
 import '../../consts/my_colors.dart';
 import '../../consts/my_icons.dart';
 import '../../helper/on_submit.dart';
+import '../../models/user_model.dart';
 
 class Level2Screen extends StatefulWidget {
-  const Level2Screen({Key? key, required this.level})
-      : assert(level == 2),
+  Level2Screen({Key? key, required this.user})
+      : assert(user.level == 2),
         super(key: key);
 
-  final int level;
+  final UserModel user;
   @override
   State<Level2Screen> createState() => _Level2ScreenState();
 }
@@ -51,7 +52,7 @@ class _Level2ScreenState extends State<Level2Screen> {
                   children: [
                     Image.asset(MyIcons.keys),
                     Text(
-                      "Level ${widget.level}",
+                      "Level ${widget.user.level}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
@@ -96,7 +97,7 @@ class _Level2ScreenState extends State<Level2Screen> {
                         onSubmit(
                           context: context,
                           confettiController: _controllerBottomCenter,
-                          level: widget.level,
+                          user: widget.user,
                           code: _passwordController.text.toString(),
                         );
                       },

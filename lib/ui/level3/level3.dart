@@ -8,13 +8,14 @@ import '../../consts/my_colors.dart';
 import '../../consts/my_icons.dart';
 import '../../helper/copy_to_clipboard.dart';
 import '../../helper/on_submit.dart';
+import '../../models/user_model.dart';
 
 class Level3Screen extends StatefulWidget {
-  const Level3Screen({Key? key, required this.level})
-      : assert(level == 3),
+  Level3Screen({Key? key, required this.user})
+      : assert(user.level == 3),
         super(key: key);
 
-  final int level;
+  final UserModel user;
   @override
   State<Level3Screen> createState() => _Level3ScreenState();
 }
@@ -52,7 +53,7 @@ class _Level3ScreenState extends State<Level3Screen> {
                   children: [
                     Image.asset(MyIcons.keys),
                     Text(
-                      "Level ${widget.level}",
+                      "Level ${widget.user.level}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
@@ -100,7 +101,7 @@ class _Level3ScreenState extends State<Level3Screen> {
                         onSubmit(
                           context: context,
                           confettiController: _controllerBottomCenter,
-                          level: widget.level,
+                          user: widget.user,
                           code: _passwordController.text.toString(),
                         );
                       },

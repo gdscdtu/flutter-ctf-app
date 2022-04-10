@@ -2,10 +2,13 @@ import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/ui/background.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:math';
 
 import '../../consts/my_colors.dart';
 import '../../consts/my_icons.dart';
+import '../../helper/copy_to_clipboard.dart';
+import '../../helper/notifications.dart';
 import '../../helper/on_submit.dart';
 import '../../models/user_model.dart';
 
@@ -24,6 +27,8 @@ class _Level6ScreenState extends State<Level6Screen> {
       TextEditingController(text: '');
 
   late ConfettiController _controllerBottomCenter;
+
+  String role = "member";
 
   @override
   void initState() {
@@ -101,11 +106,19 @@ class _Level6ScreenState extends State<Level6Screen> {
                         ),
                       ),
                       onPressed: () {
-                        onSubmit(
+                        if (role == "hacker") {
+                          onSubmit(
+                            context: context,
+                            confettiController: _controllerBottomCenter,
+                            user: widget.user,
+                            code: _passwordController.text.toString(),
+                          );
+                          return;
+                        }
+                        failureNotification(
                           context: context,
-                          confettiController: _controllerBottomCenter,
-                          user: widget.user,
-                          code: _passwordController.text.toString(),
+                          message: "Inncorect password! Try again :D",
+                          toastGravity: ToastGravity.BOTTOM,
                         );
                       },
                       child: const Text(
@@ -126,22 +139,30 @@ class _Level6ScreenState extends State<Level6Screen> {
                 Image.asset(MyIcons.lockedLock),
                 Container(
                   alignment: Alignment.center,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: MyColors.cornflowerBlue22,
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "password: ctf-gdsc-dtu",
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "GDSC-DTU",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
                         ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.copy),
+                        color: MyColors.silver,
+                        onPressed: () {
+                          copyToClipboard(context, "GDSC-DTU");
+                        },
                       ),
                     ],
                   ),

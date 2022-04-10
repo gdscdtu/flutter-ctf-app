@@ -25,6 +25,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # For Networking
+  dio: ^4.0.0
+
   # For IOS
   cupertino_icons: ^1.0.2
 

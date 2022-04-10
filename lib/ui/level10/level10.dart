@@ -1,25 +1,24 @@
 import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
-import 'package:flutter_ctf_app/consts/my_icons.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/ui/background.dart';
 import 'dart:math';
 
 import '../../consts/my_colors.dart';
-import '../../helper/copy_to_clipboard.dart';
+import '../../consts/my_icons.dart';
 import '../../helper/on_submit.dart';
 
-class Level1Screen extends StatefulWidget {
-  const Level1Screen({Key? key, required this.level})
-      : assert(level == 1),
+class Level10Screen extends StatefulWidget {
+  const Level10Screen({Key? key, required this.level})
+      : assert(level == 10),
         super(key: key);
 
   final int level;
-
   @override
-  State<Level1Screen> createState() => _Level1ScreenState();
+  State<Level10Screen> createState() => _Level10ScreenState();
 }
 
-class _Level1ScreenState extends State<Level1Screen> {
+class _Level10ScreenState extends State<Level10Screen> {
   final TextEditingController _passwordController =
       TextEditingController(text: '');
 
@@ -65,7 +64,7 @@ class _Level1ScreenState extends State<Level1Screen> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: SizedBox(
                     height: 50,
-                    child: TextFormField(
+                    child: TextField(
                       controller: _passwordController,
                       decoration: InputDecoration(
                         filled: true,
@@ -76,6 +75,7 @@ class _Level1ScreenState extends State<Level1Screen> {
                         ),
                         // enabled: false,
                       ),
+                      textCapitalization: TextCapitalization.characters,
                     ),
                   ),
                 ),
@@ -119,28 +119,22 @@ class _Level1ScreenState extends State<Level1Screen> {
                 Image.asset(MyIcons.lockedLock),
                 Container(
                   alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: MyColors.cornflowerBlue22,
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "xTbdasdbibwdiabs",
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        "password: ctf-gdsc-dtu",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
                         ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.copy),
-                        color: MyColors.silver,
-                        onPressed: () {
-                          copyToClipboard(context, "xTbdasdbibwdiabs");
-                        },
                       ),
                     ],
                   ),

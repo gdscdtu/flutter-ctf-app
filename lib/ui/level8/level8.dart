@@ -1,29 +1,32 @@
+import 'dart:async';
+
 import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
-import 'package:flutter_ctf_app/consts/my_icons.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/ui/background.dart';
 import 'dart:math';
 
 import '../../consts/my_colors.dart';
-import '../../helper/copy_to_clipboard.dart';
+import '../../consts/my_icons.dart';
 import '../../helper/on_submit.dart';
 
-class Level1Screen extends StatefulWidget {
-  const Level1Screen({Key? key, required this.level})
-      : assert(level == 1),
+class Level8Screen extends StatefulWidget {
+  const Level8Screen({Key? key, required this.level})
+      : assert(level == 8),
         super(key: key);
 
   final int level;
-
   @override
-  State<Level1Screen> createState() => _Level1ScreenState();
+  State<Level8Screen> createState() => _Level8ScreenState();
 }
 
-class _Level1ScreenState extends State<Level1Screen> {
+class _Level8ScreenState extends State<Level8Screen> {
   final TextEditingController _passwordController =
       TextEditingController(text: '');
 
   late ConfettiController _controllerBottomCenter;
+
+  bool isHovered = false;
 
   @override
   void initState() {
@@ -65,7 +68,7 @@ class _Level1ScreenState extends State<Level1Screen> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: SizedBox(
                     height: 50,
-                    child: TextFormField(
+                    child: TextField(
                       controller: _passwordController,
                       decoration: InputDecoration(
                         filled: true,
@@ -76,42 +79,56 @@ class _Level1ScreenState extends State<Level1Screen> {
                         ),
                         // enabled: false,
                       ),
+                      textCapitalization: TextCapitalization.characters,
                     ),
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        primary: MyColors.tropicalBlue,
-                        shadowColor: Colors.transparent.withOpacity(0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                if (!isHovered)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 20),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          primary: MyColors.tropicalBlue,
+                          shadowColor: Colors.transparent.withOpacity(0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                         ),
-                      ),
-                      onPressed: () {
-                        onSubmit(
-                          context: context,
-                          confettiController: _controllerBottomCenter,
-                          level: widget.level,
-                          code: _passwordController.text.toString(),
-                        );
-                      },
-                      child: const Text(
-                        'Kiểm tra',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
+                        onPressed: () {
+                          setState(() {
+                            isHovered = true;
+                          });
+
+                          Timer(const Duration(seconds: 1), () {
+                            setState(() {
+                              isHovered = false;
+                            });
+                          });
+
+                          if (!isHovered) {
+                            onSubmit(
+                              context: context,
+                              confettiController: _controllerBottomCenter,
+                              level: widget.level,
+                              code: _passwordController.text.toString(),
+                            );
+                          }
+                        },
+                        child: const Text(
+                          'Kiểm tra',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
             Column(
@@ -119,28 +136,22 @@ class _Level1ScreenState extends State<Level1Screen> {
                 Image.asset(MyIcons.lockedLock),
                 Container(
                   alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: MyColors.cornflowerBlue22,
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "xTbdasdbibwdiabs",
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        "password: ctf-gdsc-dtu",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
                         ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.copy),
-                        color: MyColors.silver,
-                        onPressed: () {
-                          copyToClipboard(context, "xTbdasdbibwdiabs");
-                        },
                       ),
                     ],
                   ),

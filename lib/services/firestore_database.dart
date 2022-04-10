@@ -25,16 +25,14 @@ class FirestoreDatabase {
   final String uid;
 
   final _fireStoreService = FirestoreService.instance;
-  // Method to update user's level
-  Future<void> updateLevel({required int level}) async =>
-      await _fireStoreService
-          .update(path: FirestorePath.user(uid), data: {"level": level});
 
   //Method to retrieve userModel object based on the given uid
   Stream<UserModel> userInformStream() {
     return _fireStoreService.documentStream(
       path: FirestorePath.user(uid),
-      builder: (data, documentId) => UserModel.fromJson(data),
+      builder: (data, documentId) {
+        return UserModel.fromJson(data);
+      },
     );
   }
 }

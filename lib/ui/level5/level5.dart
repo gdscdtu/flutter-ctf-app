@@ -2,15 +2,11 @@ import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/ui/background.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
 import 'dart:math';
 
 import '../../consts/my_colors.dart';
 import '../../consts/my_icons.dart';
-import '../../helper/notifications.dart';
-import '../../services/firestore_database.dart';
-import '../unlocked_level_screen.dart';
+import '../../helper/on_submit.dart';
 
 class Level5Screen extends StatefulWidget {
   const Level5Screen({Key? key, required this.level})
@@ -71,7 +67,7 @@ class _Level5ScreenState extends State<Level5Screen> {
                     child: TextField(
                       onChanged: (value) {
                         _passwordController.value = TextEditingValue(
-                          text: value.toLowerCase(),
+                          text: value.toUpperCase(),
                           selection: _passwordController.selection,
                         );
                       },
@@ -104,7 +100,12 @@ class _Level5ScreenState extends State<Level5Screen> {
                         ),
                       ),
                       onPressed: () {
-                        _onSubmit(context);
+                        onSubmit(
+                          context: context,
+                          confettiController: _controllerBottomCenter,
+                          level: widget.level,
+                          code: _passwordController.text.toString(),
+                        );
                       },
                       child: const Text(
                         'Kiểm tra',
@@ -161,40 +162,6 @@ class _Level5ScreenState extends State<Level5Screen> {
           ],
         ),
       ),
-    );
-  }
-
-  void _onSubmit(BuildContext context) async {
-    if (_passwordController.text.toString() == "ctf-gdsc-dtu") {
-      final firestoreDatabase =
-          Provider.of<FirestoreDatabase>(context, listen: false);
-
-      successNotification(
-        message: "Correct password! Congratulations!",
-        toastGravity: ToastGravity.BOTTOM,
-      );
-
-      _controllerBottomCenter.play();
-
-      await Future.delayed(
-        const Duration(seconds: 4),
-        () async {
-          firestoreDatabase.updateLevel(level: widget.level + 1);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  UnlockedLevelScreen(level: widget.level + 1),
-            ),
-          );
-        },
-      );
-      return;
-    }
-
-    failureNotification(
-      message: "Inncorect password! Try again :D",
-      toastGravity: ToastGravity.BOTTOM,
     );
   }
 }

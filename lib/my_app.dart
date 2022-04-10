@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ctf_app/auth_widget_builder.dart';
 import 'package:flutter_ctf_app/services/firestore_database.dart';
 import 'package:flutter_ctf_app/ui/home.dart';
+import 'package:flutter_ctf_app/ui/welcome_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({required Key key, required this.databaseBuilder})
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       databaseBuilder: databaseBuilder,
       builder: (BuildContext context) {
         return const MaterialApp(
-          home: HomeScreen(),
+          debugShowCheckedModeBanner: false,
+          home: WelcomeScreen(),
         );
       },
       key: const Key('AuthWidget'),

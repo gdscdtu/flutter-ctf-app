@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
           }
 
           return const MaterialApp(
-            home: CircularProgressIndicator(),
+            home: Center(child: CircularProgressIndicator()),
           );
         },
       ),

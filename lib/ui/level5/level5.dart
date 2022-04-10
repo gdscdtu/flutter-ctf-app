@@ -1,4 +1,5 @@
 import 'package:confetti/confetti.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/ui/background.dart';
@@ -7,13 +8,14 @@ import 'dart:math';
 import '../../consts/my_colors.dart';
 import '../../consts/my_icons.dart';
 import '../../helper/on_submit.dart';
+import '../../models/user_model.dart';
 
 class Level5Screen extends StatefulWidget {
-  const Level5Screen({Key? key, required this.level})
-      : assert(level == 5),
+  Level5Screen({Key? key, required this.user})
+      : assert(user.level == 5),
         super(key: key);
 
-  final int level;
+  final UserModel user;
   @override
   State<Level5Screen> createState() => _Level5ScreenState();
 }
@@ -51,7 +53,7 @@ class _Level5ScreenState extends State<Level5Screen> {
                   children: [
                     Image.asset(MyIcons.keys),
                     Text(
-                      "Level ${widget.level}",
+                      "Level ${widget.user.level}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
@@ -103,7 +105,7 @@ class _Level5ScreenState extends State<Level5Screen> {
                         onSubmit(
                           context: context,
                           confettiController: _controllerBottomCenter,
-                          level: widget.level,
+                          user: widget.user,
                           code: _passwordController.text.toString(),
                         );
                       },

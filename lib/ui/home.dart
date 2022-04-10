@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           if (snapshot.hasData) {
             UserModel? user = snapshot.data;
             return SafeArea(
-              child: _renderLevelScreen(level: user?.level),
+              child: _renderLevelScreen(user: user!),
             );
           }
 
@@ -41,47 +41,47 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _renderLevelScreen({int? level}) {
-    switch (level) {
+  Widget _renderLevelScreen({required UserModel user}) {
+    switch (user.level) {
       case 1:
         return Level1Screen(
-          level: level!,
+          user: user,
         );
       case 2:
         return Level2Screen(
-          level: level!,
+          user: user,
         );
       case 3:
         return Level3Screen(
-          level: level!,
+          user: user,
         );
       case 4:
         return Level4Screen(
-          level: level!,
+          user: user,
         );
       case 5:
         return Level5Screen(
-          level: level!,
+          user: user,
         );
       case 6:
         return Level6Screen(
-          level: level!,
+          user: user,
         );
       case 7:
         return Level7Screen(
-          level: level!,
+          user: user,
         );
       case 8:
         return Level8Screen(
-          level: level!,
+          user: user,
         );
       case 9:
         return Level9Screen(
-          level: level!,
+          user: user,
         );
       case 10:
         return Level10Screen(
-          level: level!,
+          user: user,
         );
       default:
         return const Center(

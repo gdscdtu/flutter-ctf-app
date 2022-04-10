@@ -7,13 +7,14 @@ import 'dart:math';
 import '../../consts/my_colors.dart';
 import '../../helper/copy_to_clipboard.dart';
 import '../../helper/on_submit.dart';
+import '../../models/user_model.dart';
 
 class Level1Screen extends StatefulWidget {
-  const Level1Screen({Key? key, required this.level})
-      : assert(level == 1),
+  Level1Screen({Key? key, required this.user})
+      : assert(user.level == 1),
         super(key: key);
 
-  final int level;
+  final UserModel user;
 
   @override
   State<Level1Screen> createState() => _Level1ScreenState();
@@ -52,7 +53,7 @@ class _Level1ScreenState extends State<Level1Screen> {
                   children: [
                     Image.asset(MyIcons.keys),
                     Text(
-                      "Level ${widget.level}",
+                      "Level ${widget.user.level}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
@@ -97,7 +98,7 @@ class _Level1ScreenState extends State<Level1Screen> {
                         onSubmit(
                           context: context,
                           confettiController: _controllerBottomCenter,
-                          level: widget.level,
+                          user: widget.user,
                           code: _passwordController.text.toString(),
                         );
                       },

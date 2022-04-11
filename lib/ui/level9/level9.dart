@@ -130,11 +130,12 @@ class _Level9ScreenState extends State<Level9Screen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
-                        "password: ctf-gdsc-dtu",
+                        "Mật khẩu là số người chơi \n hiện tại trên hệ thống",
                         style: TextStyle(
+                          overflow: TextOverflow.ellipsis,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 16,
                         ),
                       ),
                     ],

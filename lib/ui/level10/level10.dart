@@ -2,6 +2,7 @@ import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/ui/background.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
 
 import '../../consts/my_colors.dart';
@@ -128,14 +129,21 @@ class _Level10ScreenState extends State<Level10Screen> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "password: ctf-gdsc-dtu",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                    children: [
+                      GestureDetector(
+                        child: const Text(
+                          "Password is in this link!",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              decoration: TextDecoration.underline),
                         ),
+                        onTap: () async {
+                          const url =
+                              'https://gsdcdtu-flagflutter-hvvms.ondigitalocean.app/password';
+                          if (await canLaunch(url)) launch(url);
+                        },
                       ),
                     ],
                   ),

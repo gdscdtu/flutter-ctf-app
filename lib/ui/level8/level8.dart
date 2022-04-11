@@ -147,11 +147,11 @@ class _Level8ScreenState extends State<Level8Screen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
-                        "password: ctf-gdsc-dtu",
+                        "ProductionJustDisturbLipstick",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 16,
                         ),
                       ),
                     ],

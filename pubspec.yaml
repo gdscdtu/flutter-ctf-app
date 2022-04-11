@@ -51,6 +51,9 @@ dependencies:
 
   confetti: ^0.6.0
 
+  # For launching url
+  url_launcher: ^6.0.20
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -6,6 +6,7 @@ import 'package:flutter_ctf_app/ui/background.dart';
 
 import '../../consts/my_colors.dart';
 import '../../consts/my_icons.dart';
+import '../../helper/copy_to_clipboard.dart';
 import '../../helper/on_submit.dart';
 import '../../models/user_model.dart';
 
@@ -129,17 +130,19 @@ class _Level4ScreenState extends State<Level4Screen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "GDSC-DTU-2022",
+                        "KnifeGladThoroughSilent1",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 16,
                         ),
                       ),
                       IconButton(
                         icon: const Icon(Icons.copy),
                         color: MyColors.silver,
-                        onPressed: () {},
+                        onPressed: () {
+                          copyToClipboard(context, "KnifeGladThoroughSilent1");
+                        },
                       ),
                     ],
                   ),

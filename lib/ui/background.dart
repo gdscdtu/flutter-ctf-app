@@ -9,6 +9,7 @@ class Background extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
+      alignment: Alignment.center,
       constraints: const BoxConstraints.expand(),
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -16,7 +17,9 @@ class Background extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      child: child,
+      child: SingleChildScrollView(
+        child: child,
+      ),
     );
   }
 }

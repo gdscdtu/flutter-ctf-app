@@ -129,18 +129,18 @@ class _Level1ScreenState extends State<Level1Screen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "xTbdasdbibwdiabs",
+                        "MurderFightAmongFinish",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 16,
                         ),
                       ),
                       IconButton(
                         icon: const Icon(Icons.copy),
                         color: MyColors.silver,
                         onPressed: () {
-                          copyToClipboard(context, "xTbdasdbibwdiabs");
+                          copyToClipboard(context, "MurderFightAmongFinish");
                         },
                       ),
                     ],

@@ -62,27 +62,6 @@ class _Level3ScreenState extends State<Level3Screen> {
                     ),
                   ],
                 ),
-                Visibility(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: SizedBox(
-                      height: 50,
-                      child: TextFormField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          // enabled: false,
-                        ),
-                      ),
-                    ),
-                  ),
-                  visible: false,
-                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
@@ -132,18 +111,19 @@ class _Level3ScreenState extends State<Level3Screen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "DTU-DSC-2022",
+                        "BowlPreserveGreaseDecision7",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 16,
                         ),
                       ),
                       IconButton(
                         icon: const Icon(Icons.copy),
                         color: MyColors.silver,
                         onPressed: () {
-                          copyToClipboard(context, "Hello");
+                          copyToClipboard(
+                              context, "BowlPreserveGreaseDecision7");
                         },
                       ),
                     ],

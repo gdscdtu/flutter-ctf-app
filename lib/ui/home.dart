@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_ctf_app/models/user_model.dart';
 import 'package:flutter_ctf_app/services/firestore_database.dart';
 import 'package:flutter_ctf_app/ui/level1/level1.dart';
+import 'package:flutter_ctf_app/ui/winner_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'level2/level2.dart';
@@ -81,6 +82,10 @@ class HomeScreen extends StatelessWidget {
         );
       case 10:
         return Level10Screen(
+          user: user,
+        );
+      case 11:
+        return WinnerScreen(
           user: user,
         );
       default:

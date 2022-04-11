@@ -1,4 +1,5 @@
 import 'package:confetti/confetti.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -31,19 +32,29 @@ void onSubmit({
       return;
     }
   } catch (e) {
-    if (user.isBlocked!) {
+    if (e is DioError) {
+      if (e.response?.data["message"][0] == "Level is wrong") {
+        failureNotification(
+          context: context,
+          message: "Your are treating! Warning 1!",
+          toastGravity: ToastGravity.BOTTOM,
+        );
+        return;
+      }
+      if (user.isBlocked!) {
+        failureNotification(
+          context: context,
+          message: "Your are blocked because of treating!",
+          toastGravity: ToastGravity.BOTTOM,
+        );
+
+        return;
+      }
       failureNotification(
         context: context,
-        message: "Your are blocked because of treating!",
+        message: "Inncorect password! Try again :D",
         toastGravity: ToastGravity.BOTTOM,
       );
-
-      return;
     }
-    failureNotification(
-      context: context,
-      message: "Inncorect password! Try again :D",
-      toastGravity: ToastGravity.BOTTOM,
-    );
   }
 }

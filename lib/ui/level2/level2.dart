@@ -120,17 +120,32 @@ class _Level2ScreenState extends State<Level2Screen> {
                 ),
               ],
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: ConfettiWidget(
-                confettiController: _controllerBottomCenter,
-                blastDirection: -pi / 2,
-                emissionFrequency: 0.01,
-                numberOfParticles: 20,
-                maxBlastForce: 100,
-                minBlastForce: 80,
-                gravity: 0.3,
-              ),
+            Column(
+              children: [
+                Image.asset(MyIcons.lockedLock),
+                Container(
+                  alignment: Alignment.center,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: MyColors.cornflowerBlue22,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        "Mật khẩu nằm trong source.\nHãy tìm hiểu nó",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ],
         ),

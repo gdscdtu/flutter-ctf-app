@@ -6,6 +6,7 @@ import 'dart:math';
 
 import '../../consts/my_colors.dart';
 import '../../consts/my_icons.dart';
+import '../../helper/copy_to_clipboard.dart';
 import '../../helper/on_submit.dart';
 import '../../models/user_model.dart';
 
@@ -73,9 +74,15 @@ class _Level7ScreenState extends State<Level7Screen> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
+                        isDense: true,
                         border: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.circular(30),
+                        ),
+                        hintText: 'Vừng ơi mở ra',
+                        suffixIcon: IconButton(
+                          onPressed: _passwordController.clear,
+                          icon: const Icon(Icons.clear),
                         ),
                         // enabled: false,
                       ),
@@ -123,16 +130,17 @@ class _Level7ScreenState extends State<Level7Screen> {
                 Image.asset(MyIcons.lockedLock),
                 Container(
                   alignment: Alignment.center,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: MyColors.cornflowerBlue22,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "WarmListCalmHomemade",
                         style: TextStyle(
                           color: Colors.white,
@@ -140,6 +148,13 @@ class _Level7ScreenState extends State<Level7Screen> {
                           fontSize: 16,
                         ),
                       ),
+                      IconButton(
+                        icon: const Icon(Icons.copy),
+                        color: MyColors.silver,
+                        onPressed: () {
+                          copyToClipboard(context, "WarmListCalmHomemade");
+                        },
+                      )
                     ],
                   ),
                 )

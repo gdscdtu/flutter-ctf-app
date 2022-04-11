@@ -71,9 +71,15 @@ class _Level10ScreenState extends State<Level10Screen> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
+                        isDense: true,
                         border: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.circular(30),
+                        ),
+                        hintText: 'Vừng ơi mở ra',
+                        suffixIcon: IconButton(
+                          onPressed: _passwordController.clear,
+                          icon: const Icon(Icons.clear),
                         ),
                         // enabled: false,
                       ),

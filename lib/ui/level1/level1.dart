@@ -1,5 +1,6 @@
 import 'package:confetti/confetti.dart';
 import "package:flutter/material.dart";
+import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/consts/my_icons.dart';
 import 'package:flutter_ctf_app/ui/background.dart';
 import 'dart:math';
@@ -68,13 +69,21 @@ class _Level1ScreenState extends State<Level1Screen> {
                     height: 50,
                     child: TextFormField(
                       controller: _passwordController,
+                      showCursor: true,
                       decoration: InputDecoration(
+                        hintText: 'Vừng ơi mở ra',
                         filled: true,
                         fillColor: Colors.white,
+                        isDense: true,
                         border: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.circular(30),
                         ),
+                        suffixIcon: IconButton(
+                          onPressed: _passwordController.clear,
+                          icon: const Icon(Icons.clear),
+                        ),
+
                         // enabled: false,
                       ),
                     ),
@@ -147,18 +156,6 @@ class _Level1ScreenState extends State<Level1Screen> {
                   ),
                 )
               ],
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: ConfettiWidget(
-                confettiController: _controllerBottomCenter,
-                blastDirection: -pi / 2,
-                emissionFrequency: 0.01,
-                numberOfParticles: 20,
-                maxBlastForce: 100,
-                minBlastForce: 80,
-                gravity: 0.3,
-              ),
             ),
           ],
         ),

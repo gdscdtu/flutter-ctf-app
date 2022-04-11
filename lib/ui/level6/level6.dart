@@ -71,12 +71,6 @@ class _Level6ScreenState extends State<Level6Screen> {
                   child: SizedBox(
                     height: 50,
                     child: TextField(
-                      onChanged: (value) {
-                        _passwordController.value = TextEditingValue(
-                          text: value.toUpperCase(),
-                          selection: _passwordController.selection,
-                        );
-                      },
                       controller: _passwordController,
                       decoration: InputDecoration(
                         filled: true,
@@ -150,18 +144,18 @@ class _Level6ScreenState extends State<Level6Screen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "GDSC-DTU",
+                        "TubeDollarCoverIsland",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 16,
                         ),
                       ),
                       IconButton(
                         icon: const Icon(Icons.copy),
                         color: MyColors.silver,
                         onPressed: () {
-                          copyToClipboard(context, "GDSC-DTU");
+                          copyToClipboard(context, "TubeDollarCoverIsland");
                         },
                       ),
                     ],

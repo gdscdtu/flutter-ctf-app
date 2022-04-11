@@ -137,11 +137,11 @@ class _Level5ScreenState extends State<Level5Screen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
-                        "password: ctf-gdsc-dtu",
+                        "ClassificationScoldThenDetail",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 16,
                         ),
                       ),
                     ],

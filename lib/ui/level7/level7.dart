@@ -133,11 +133,11 @@ class _Level7ScreenState extends State<Level7Screen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
-                        "password: ctf-gdsc-dtu",
+                        "WarmListCalmHomemade",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 16,
                         ),
                       ),
                     ],

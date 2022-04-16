@@ -17,10 +17,10 @@ void onSubmit({
 }) async {
   try {
     final dio = Provider.of<AppDio>(context, listen: false);
-
+    print("code: $code");
     final response = await dio
         .post("/submit", data: {"uid": UID, "level": user.level, "code": code});
-
+    print("response: $response");
     if (response.statusCode == 201) {
       confettiController.play();
 
@@ -32,6 +32,7 @@ void onSubmit({
       return;
     }
   } catch (e) {
+    print("Error: $e");
     if (e is DioError) {
       if (e.response?.data["message"][0] == "Level is wrong") {
         failureNotification(

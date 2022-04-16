@@ -1,4 +1,5 @@
 import 'package:dio/adapter.dart';
+import 'package:dio/adapter_browser.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
@@ -29,8 +30,11 @@ class AppDio with DioMixin implements Dio {
       // Local Log
       // interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
     }
-
-    httpClientAdapter = DefaultHttpClientAdapter();
+    if (kIsWeb) {
+      httpClientAdapter = BrowserHttpClientAdapter();
+    } else {
+      httpClientAdapter = DefaultHttpClientAdapter();
+    }
   }
 
   static Dio getInstance() => AppDio();

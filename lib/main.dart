@@ -4,12 +4,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_ctf_app/remote/app_dio.dart';
 import 'package:flutter_ctf_app/services/firestore_database.dart';
 import 'package:provider/provider.dart';
+import 'firebase_options.dart';
 
 import 'my_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) async {
     runApp(MultiProvider(
